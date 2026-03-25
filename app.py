@@ -1,20 +1,24 @@
 from flask import Flask, render_template, request, jsonify
 import mysql.connector
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
-# 🔴 Paste your Railway MySQL credentials here
+# MySQL connection (Railway)
 db = mysql.connector.connect(
-    host="YOUR_HOST",
-    user="YOUR_USER",
-    password="YOUR_PASSWORD",
-    database="YOUR_DATABASE",
-    port=3306   # or your Railway port (sometimes different)
+    host=os.getenv("DB_HOST"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    database=os.getenv("DB_NAME"),
+    port=os.getenv("DB_PORT")
 )
 
 cursor = db.cursor()
 
-# Create table if not exists
+# Create table
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS contacts (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -31,10 +35,9 @@ def home():
 @app.route("/contact", methods=["POST"])
 def contact():
     data = request.json
-
-    name = data.get("name")
-    email = data.get("email")
-    message = data.get("message")
+    name = data["name"]
+    email = data["email"]
+    message = data["message"]
 
     query = "INSERT INTO contacts (name, email, message) VALUES (%s, %s, %s)"
     cursor.execute(query, (name, email, message))
