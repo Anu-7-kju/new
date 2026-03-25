@@ -29,15 +29,28 @@ def home():
 
 @app.route("/contact", methods=["POST"])
 def contact():
-    data = request.json
+    try:
+        data = request.json
 
-    cursor.execute(
-        "INSERT INTO contacts (name, email, message) VALUES (%s, %s, %s)",
-        (data["name"], data["email"], data["message"])
-    )
+        print("Received:", data)  # 👈 DEBUG
+
+        query = "INSERT INTO contacts (name, email, message) VALUES (%s, %s, %s)"
+        cursor.execute(query, (data["name"], data["email"], data["message"]))
+
+        db.commit()  # 👈 MUST
+
+        print("Inserted successfully")  # 👈 DEBUG
+
+        return jsonify({"message": "Saved successfully!"})
+
+    except Exception as e:
+        print("ERROR:", e)
+        return jsonify({"message": "Error occurred"})
+@app.route("/test")
+def test():
+    cursor.execute("INSERT INTO contacts (name,email,message) VALUES ('test','test','hello')")
     db.commit()
-
-    return jsonify({"message": "Message saved successfully!"})
+    return "Inserted"
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
