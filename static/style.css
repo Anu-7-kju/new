@@ -45,24 +45,6 @@ section p, section ul, form {
     margin: auto;
 }
 
-/* Certificates */
-.certificates {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.cert-card img {
-    width: 200px;
-    border-radius: 10px;
-    transition: 0.3s;
-}
-
-.cert-card img:hover {
-    transform: scale(1.1);
-}
-
 /* Button */
 button {
     background: #3a5a40;
