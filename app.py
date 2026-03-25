@@ -1,36 +1,46 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask import Flask, render_template, request, jsonify
 import mysql.connector
-import os
 
 app = Flask(__name__)
-CORS(app)
 
+# 🔴 Paste your Railway MySQL credentials here
 db = mysql.connector.connect(
-    host=os.getenv("MYSQLHOST"),
-    user=os.getenv("MYSQLUSER"),
-    password=os.getenv("MYSQLPASSWORD"),
-    database=os.getenv("MYSQLDATABASE"),
-    port=int(os.getenv("MYSQLPORT", 3306))
+    host="YOUR_HOST",
+    user="YOUR_USER",
+    password="YOUR_PASSWORD",
+    database="YOUR_DATABASE",
+    port=3306   # or your Railway port (sometimes different)
 )
+
+cursor = db.cursor()
+
+# Create table if not exists
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS contacts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    message TEXT
+)
+""")
 
 @app.route("/")
 def home():
-    return "Portfolio Running"
+    return render_template("index.html")
 
 @app.route("/contact", methods=["POST"])
 def contact():
     data = request.json
+
     name = data.get("name")
     email = data.get("email")
     message = data.get("message")
 
-    cursor = db.cursor()
-    sql = "INSERT INTO contacts (name, email, message) VALUES (%s, %s, %s)"
-    cursor.execute(sql, (name, email, message))
+    query = "INSERT INTO contacts (name, email, message) VALUES (%s, %s, %s)"
+    cursor.execute(query, (name, email, message))
     db.commit()
 
-    return jsonify({"status": "success"})
+    return jsonify({"message": "Saved successfully!"})
 
 if __name__ == "__main__":
     app.run(debug=True)
