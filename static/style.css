@@ -1,33 +1,79 @@
 body {
     margin: 0;
-    font-family: Arial;
-    background: #0f172a;
-    color: white;
+    font-family: 'Poppins', sans-serif;
+    background: #f5f5dc;
+    color: #2f3e2e;
     text-align: center;
 }
 
+/* Hero */
 .hero {
+    background: linear-gradient(135deg, #588157, #3a5a40);
+    color: white;
     padding: 100px;
-    background: #1e293b;
 }
 
+.hero h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 36px;
+}
+
+/* Headings */
+h1, h2 {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Profile */
+.profile-img {
+    width: 150px;
+    border-radius: 50%;
+    border: 4px solid #a3b18a;
+}
+
+/* Sections */
 section {
     padding: 40px;
+    animation: fadeIn 1s ease;
 }
 
-input, textarea {
-    display: block;
+/* Boxes */
+section p, section ul, form {
+    background: #fffaf0;
+    padding: 20px;
+    border-radius: 15px;
     width: 70%;
-    margin: 10px auto;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
+    margin: auto;
 }
 
+/* Certificates */
+.certificates {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.cert-card img {
+    width: 200px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.cert-card img:hover {
+    transform: scale(1.1);
+}
+
+/* Button */
 button {
-    padding: 10px 20px;
-    background: #38bdf8;
+    background: #3a5a40;
+    color: white;
+    padding: 10px;
     border: none;
-    color: black;
-    cursor: pointer;
+    border-radius: 8px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }

@@ -1,47 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <title>My Portfolio</title>
+
+    <!-- 🌐 Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300;400;600&family=Dancing+Script&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-    <!-- Quote -->
-    <section class="hero">
-        <h1>"Dream it. Build it. Code it."</h1>
-    </section>
+<section class="hero">
+    <h1>"Turning ideas into reality through code and creativity."</h1>
+</section>
 
-    <!-- About -->
-    <section>
-        <h2>About Me</h2>
-        <p>I am a developer passionate about building web applications.</p>
-    </section>
+<section class="profile">
+    <img src="{{ url_for('static', filename='photo.jpg') }}" class="profile-img">
+    <h1>Anirudh</h1>
+    <p>BCA 2nd Semester Student</p>
+</section>
 
-    <!-- Skills -->
-    <section>
-        <h2>Skills</h2>
-        <ul>
-            <li>Python</li>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>Data Structures</li>
-        </ul>
-    </section>
+<section>
+    <h2>About Me</h2>
+    <p>I am a passionate BCA student skilled in Python, C, RDBMS, HTML, and MongoDB basics. I enjoy problem solving and creative work.</p>
+</section>
 
-    <!-- Contact -->
-    <section>
-        <h2>Contact</h2>
-        <form id="contactForm">
-            <input type="text" id="name" placeholder="Name" required>
-            <input type="email" id="email" placeholder="Email" required>
-            <textarea id="message" placeholder="Message" required></textarea>
-            <button type="submit">Send</button>
-        </form>
-    </section>
+<section>
+    <h2>Skills</h2>
+    <ul>
+        <li>Python Programming</li>
+        <li>C Programming</li>
+        <li>MySQL (RDBMS)</li>
+        <li>HTML & CSS</li>
+        <li>MongoDB Basics</li>
+        <li>Creativity & Crafting</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Projects</h2>
+    <ul>
+        <li>Portfolio Website (Flask + MySQL)</li>
+        <li>Contact Form with Database</li>
+        <li>CRUD Application</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Certificates</h2>
+
+    <div class="certificates">
+        <div class="cert-card">
+            <img src="{{ url_for('static', filename='cert_python.jpg') }}">
+            <p>Python</p>
+        </div>
+
+        <div class="cert-card">
+            <img src="{{ url_for('static', filename='cert_c.jpg') }}">
+            <p>C Programming</p>
+        </div>
+
+        <div class="cert-card">
+            <img src="{{ url_for('static', filename='cert_html.jpg') }}">
+            <p>HTML & CSS</p>
+        </div>
+
+        <div class="cert-card">
+            <img src="{{ url_for('static', filename='cert_db.jpg') }}">
+            <p>Database</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Contact Me</h2>
+    <form id="contactForm">
+        <input type="text" id="name" placeholder="Your Name" required><br>
+        <input type="email" id="email" placeholder="Your Email" required><br>
+        <textarea id="message" placeholder="Your Message" required></textarea><br>
+        <button type="submit">Send</button>
+    </form>
+</section>
 
 <script>
-document.getElementById("contactForm").addEventListener("submit", async (e) => {
+document.getElementById("contactForm").addEventListener("submit", async function(e) {
     e.preventDefault();
 
     const data = {
@@ -50,15 +92,13 @@ document.getElementById("contactForm").addEventListener("submit", async (e) => {
         message: document.getElementById("message").value
     };
 
-    const res = await fetch("/contact", {
+    const response = await fetch("/contact", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify(data)
     });
 
-    const result = await res.json();
+    const result = await response.json();
     alert(result.message);
 });
 </script>
