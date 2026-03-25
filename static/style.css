@@ -1,0 +1,30 @@
+body {
+  font-family: Arial;
+  background: #0f172a;
+  color: white;
+  margin: 0;
+}
+
+header {
+  text-align: center;
+  padding: 50px;
+  background: #1e293b;
+}
+
+section {
+  padding: 30px;
+}
+
+input, textarea {
+  display: block;
+  margin: 10px 0;
+  padding: 10px;
+  width: 250px;
+}
+
+button {
+  padding: 10px;
+  background: #38bdf8;
+  border: none;
+  cursor: pointer;
+}
