@@ -62,25 +62,26 @@
 </section>
 
 <script>
-document.getElementById("contactForm").addEventListener("submit", async function(e) {
-    e.preventDefault();
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+        e.preventDefault();
 
-    const data = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        message: document.getElementById("message").value
-    };
-
-    const response = await fetch("/contact", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(data)
+        fetch("/contact", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                message: document.getElementById("message").value
+            })
+        })
+        .then(res => res.json())
+        .then(data => alert(data.message))
+        .catch(err => console.error(err));
     });
+    </script>
 
-    const result = await response.json();
-    alert(result.message);
-});
-</script>
 
 </body>
 </html>
