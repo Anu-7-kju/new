@@ -5,11 +5,11 @@ import os
 app = Flask(__name__)
 
 db = mysql.connector.connect(
-    host="centerbeam.proxy.rlwy.net",
-    user="root",
-    password="XqvARwoftsLzVQmSMXdZZmNviVnYOoCK",
-    database="railway",
-    port=18096
+    host=os.getenv("DB_HOST"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    database=os.getenv("DB_NAME"),
+    port=int(os.getenv("DB_PORT"))
 )
 
 cursor = db.cursor()
