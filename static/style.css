@@ -1,6 +1,5 @@
 body {
     margin: 0;
-    font-family: 'Poppins', sans-serif;
     background: #f5f5dc;
     color: #2f3e2e;
     text-align: center;
@@ -14,13 +13,12 @@ body {
 }
 
 .hero h1 {
-    font-family: 'Dancing Script', cursive;
     font-size: 36px;
 }
 
 /* Headings */
 h1, h2 {
-    font-family: 'Playfair Display', serif;
+    /* default font will be used */
 }
 
 /* Profile */
@@ -45,26 +43,12 @@ section p, section ul, form {
     margin: auto;
 }
 
-/* Button */
-button {
-    background: #3a5a40;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-}
-
-/* Animation */
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
 /* 📩 Contact Form Box */
 form {
     background: #fffaf0;
     padding: 30px;
     border-radius: 20px;
-    width: 60%; /* makes it long */
+    width: 60%;
     margin: 40px auto;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
@@ -76,10 +60,9 @@ input, textarea {
     margin: 12px 0;
     border: 1px solid #a3b18a;
     border-radius: 10px;
-    font-size: 16px;
 }
 
-/* ✍️ Make message box bigger */
+/* ✍️ Message box */
 textarea {
     height: 120px;
     resize: none;
@@ -92,7 +75,6 @@ button {
     padding: 12px 25px;
     border: none;
     border-radius: 10px;
-    font-size: 16px;
     cursor: pointer;
     transition: 0.3s;
 }
@@ -101,4 +83,10 @@ button {
 button:hover {
     background: #588157;
     transform: scale(1.05);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
