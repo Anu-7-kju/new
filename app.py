@@ -29,10 +29,10 @@ def home():
 
 @app.route("/contact", methods=["POST"])
 def contact():
-    print("ROUTE HIT")   # 👈 ADD THIS
+    print("🔥 ROUTE HIT")   # MUST PRINT
 
     try:
-        data = request.json
+        data = request.get_json()
         print("DATA:", data)
 
         cursor.execute(
@@ -41,14 +41,13 @@ def contact():
         )
         db.commit()
 
-        print("INSERTED")
+        print("✅ INSERTED")
 
-        return jsonify({"message": "Saved!"})
+        return jsonify({"message": "Saved successfully!"})
 
     except Exception as e:
-        print("ERROR:", e)
+        print("❌ ERROR:", e)
         return jsonify({"message": "Error"})
-
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
