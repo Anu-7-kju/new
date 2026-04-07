@@ -9,7 +9,7 @@ db = mysql.connector.connect(
     user=os.getenv("MYSQLUSER"),
     password=os.getenv("MYSQLPASSWORD"),
     database=os.getenv("MYSQLDATABASE"),
-    port=int(os.getenv("MYSQLPORT", 3306))
+    port=int(os.getenv("MYSQLPORT"))
 )
 
 cursor = db.cursor()
@@ -23,21 +23,26 @@ CREATE TABLE IF NOT EXISTS contacts (
 )
 """)
 
-@app.route("/")
+@app.route("/")#update
 def home():
     return render_template("index.html")
 
 @app.route("/contact", methods=["POST"])
 def contact():
-    print("🔥 ROUTE HIT")   # MUST PRINT
+    print("🔥 ROUTE HIT")
 
     try:
         data = request.get_json()
         print("DATA:", data)
 
+        # ✅ CLEAN INPUT
+        name = data["name"].strip()
+        email = data["email"].strip()
+        message = data["message"].strip()
+
         cursor.execute(
             "INSERT INTO contacts (name, email, message) VALUES (%s, %s, %s)",
-            (data["name"], data["email"], data["message"])
+            (name, email, message)
         )
         db.commit()
 
